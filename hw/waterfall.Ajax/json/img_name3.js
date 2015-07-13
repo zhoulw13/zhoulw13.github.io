@@ -17,8 +17,8 @@
 	{"id":55, "url":"image/showLove (55).jpg", "column":3},
 	{"id":56, "url":"image/showLove (56).jpg", "column":1},
 	{"id":57, "url":"image/showLove (57).jpg", "column":2},
-	{"id":58, "url":"image/showLove (58).jpg", "column":3},
-	{"id":59, "url":"image/showLove (59).jpg", "column":2},
-	{"id":60, "url":"image/showLove (60).jpg", "column":3}
+	{"id":58, "url":"image/showLove (58).jpg", "column":1},
+	{"id":59, "url":"image/showLove (59).jpg", "column":1},
+	{"id":60, "url":"image/showLove (60).jpg", "column":2}
 	]
 }
