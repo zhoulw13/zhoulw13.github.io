@@ -11,6 +11,7 @@ function callback(data){
  		var c = li.clone(true);
  		c.children().attr("href", item.url);
  		c.children().children().attr("src", item.url);
+ 		c.children().children().attr("id", "img"+item.id);
  		var str = "#ul" + item.column;
  		var ul = $(str);
  		ul.append(c);
