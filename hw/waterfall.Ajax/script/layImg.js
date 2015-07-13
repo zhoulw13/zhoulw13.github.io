@@ -23,13 +23,3 @@ var li = $('#ul1 li:last');
 $('#ul2').append(li);
 var li = $('#ul1 li:last');
 $('#ul2').append(li);
-
-$(window).scroll(function() {
-                 
-    if($(document).height() - $(window).height() - $(document).scrollTop() < 10) {
-         
-        alert('end');
-         
-    }
-     
-});

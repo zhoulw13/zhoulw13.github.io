@@ -1,23 +1,16 @@
-var xhr = createXHR();
-
-function createXHR(){
-	if (typeof XMLHttpRequest != "undefined"){
-		return new XMLHttpRequest();
-	} else {
-		throw new Error("No XHR object available.");
-	}
+function getImg(i){
+	var str = "json/img_name"+i+".js";
+	$.getJSON(str, callback);
 }
 
-xhr.onreadystatechange = function(event){
-	if (xhr.readyState == 4){
-		if ((xhr.status >= 200 && xhr.status < 300) || xhr.status
-		== 304){
-			alert(xhr.responseText);
-		} else {
-			alert("Request was unsuccessful: " + xhr.status);
-		}
-	}
-};
-
-xhr.open("GET", "ajaxHandler.php", true);
-xhr.send(null);
+function callback(data){
+	$.each(data.items, function(i,item){
+ 		var li = $('#ul1 li:first');
+ 		var c = li.clone(true);
+ 		c1.children().attr("href", item.url);
+ 		c1.children().children().attr("src", item.url);
+ 		var str = "#ul" + item.column;
+ 		var ul = $(str);
+ 		ul.append(c);
+  });
+}
