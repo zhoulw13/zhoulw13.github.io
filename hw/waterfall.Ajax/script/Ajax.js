@@ -7,8 +7,8 @@ function callback(data){
 	$.each(data.images, function(i,item){
  		var li = $('#ul1 li:first');
  		var c = li.clone(true);
- 		c1.children().attr("href", item.url);
- 		c1.children().children().attr("src", item.url);
+ 		c.children().attr("href", item.url);
+ 		c.children().children().attr("src", item.url);
  		var str = "#ul" + item.column;
  		var ul = $(str);
  		ul.append(c);
