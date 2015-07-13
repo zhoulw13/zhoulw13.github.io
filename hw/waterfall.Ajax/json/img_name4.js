@@ -18,7 +18,7 @@
 	{"id":76, "url":"image/showLove (76).jpg", "column":1},
 	{"id":77, "url":"image/showLove (77).jpg", "column":2},
 	{"id":78, "url":"image/showLove (78).jpg", "column":3},
-	{"id":79, "url":"image/showLove (79).jpg", "column":2},
+	{"id":79, "url":"image/showLove (79).jpg", "column":1},
 	{"id":80, "url":"image/showLove (80).jpg", "column":3}
 	]
 }
