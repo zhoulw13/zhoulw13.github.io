@@ -4,7 +4,7 @@ function getImg(i){
 }
 
 function callback(data){
-	$.each(data.items, function(i,item){
+	$.each(data.images, function(i,item){
  		var li = $('#ul1 li:first');
  		var c = li.clone(true);
  		c1.children().attr("href", item.url);
