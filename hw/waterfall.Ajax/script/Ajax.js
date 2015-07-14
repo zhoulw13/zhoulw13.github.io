@@ -14,7 +14,7 @@ function callback(data){
  		var c = li.clone(true);
  		c.children().children().attr("src", item.url);
  		c.children().children().attr("id", "img"+item.id);
- 		c.children('p').html("该图片距离您"+d+"km");
+ 		c.children('p').html("该图片距离您"+parseInt(d)+"km");
  		var str = "#ul" + item.column;
  		if(item.id <=3)
 			$("#ul"+item.id+ " li:first").remove();
@@ -139,7 +139,8 @@ var my_pos ={
 function getPos(){
 	if(navigator.geolocation){
 		navigator.geolocation.getCurrentPosition(function(pos){
-			my_pos =  pos;
+			my_pos.latitude = pos.latitude;
+			my_pos.longitude = pos.longitude;
 		})
 	}
 }
