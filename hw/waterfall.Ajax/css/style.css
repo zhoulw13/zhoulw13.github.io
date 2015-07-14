@@ -90,3 +90,28 @@ hr { width:80%; height:2px; background: #fff }
 #img:hover img{
     border-width: 5px;
 }
+
+.lightbox .lb-image
+{
+    max-width: none;
+}
+
+.popBg{
+  background:#000; 
+  opacity:0.5; 
+  filter:alpha(opacity=50);
+  height:100%; 
+  width:100%; 
+  position:fixed; 
+  _position:absolute; 
+  z-index:99;
+}
+.popWrap{ 
+  position:fixed;
+  _position:absolute; 
+  left:50%; 
+  margin-left:-300px; 
+  top:300px; 
+  width:600px; 
+  z-index:100;
+}
