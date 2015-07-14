@@ -1,6 +1,6 @@
 body{
 	background: #ebeeee;
-    height:auto;
+  height:auto;
 }
 
 header {
@@ -76,19 +76,15 @@ hr { width:80%; height:2px; background: #fff }
 
 #img .pic {
     z-index: 16;
-    -webkit-box-shadow: 0 6px 12px rgba(0, 0, 0, 0.175); 
-            box-shadow: 0 6px 12px rgba(0, 0, 0, 0.175); 
 }
 
 #img img{
     border-color: white;
     border-width: 10px; 
     border-radius: 5px;
-    width: 100%;   
-}
-
-#img:hover img{
-    border-width: 5px;
+    width: 100%;
+    -webkit-box-shadow: 0 6px 12px rgba(0, 0, 0, 0.175); 
+            box-shadow: 0 6px 12px rgba(0, 0, 0, 0.175);    
 }
 
 .lightbox .lb-image
@@ -98,20 +94,34 @@ hr { width:80%; height:2px; background: #fff }
 
 .popBg{
   background:#000; 
-  opacity:0.5; 
+  opacity:0.7; 
   filter:alpha(opacity=50);
   height:100%; 
   width:100%; 
   position:fixed; 
+  left:0;
+  top:0;
   _position:absolute; 
   z-index:99;
 }
+
 .popWrap{ 
   position:fixed;
-  _position:absolute; 
-  left:50%; 
-  margin-left:-300px; 
-  top:300px; 
-  width:600px; 
   z-index:100;
+}
+
+.comments{
+  background: #ebeeee;
+  overflow: scroll;
+  overflow-x:visible;
+  position: fixed;
+  z-index: 100;
+  height: 50%;
+  margin-left:10px;
+  border-radius: 5px;
+  top:25%;
+}
+
+.comments p{
+
 }

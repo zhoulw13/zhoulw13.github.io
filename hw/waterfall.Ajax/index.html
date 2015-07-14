@@ -10,9 +10,9 @@
 		<script type='text/javascript' src='script/BackToTop.js'></script>
 		<script type='text/javascript' src='script/Ajax.js'></script>
 		<script type='text/javascript' src='script/layImg.js'></script>
-		<script type='text/javascript' src='script/lightbox.js'></script>
+		<script type='text/javascript' src='script/lightbox.min.js'></script>
+		<script type="text/javascript" src="script/jquery.fancybox.pack.js"></script>
 		<link rel="stylesheet" href="/css/jquery.fancybox.css" type="text/css" media="screen" />
-<script type="text/javascript" src="script/jquery.fancybox.pack.js"></script>
 		<link rel="stylesheet" type="text/css" href="css/fonts.css"/>
 		<link rel="stylesheet" type="text/css" href="css/style.css" />
 		<link rel="stylesheet" href="css/lightbox.css"/>
@@ -20,9 +20,6 @@
 	<body>
 		<script type="text/javascript">
 			BackToTop.init({RightDown:true});
-			$(document).ready(function() {
-				$(".fancybox").fancybox();
-			});
 		</script>
 		<div id="body">
 			<header style=="height:300px;">
@@ -34,17 +31,17 @@
 			<div class="img-wall">
 				<ul class="img-column" id="ul1">
 					<li id="img">
-						<a href="javascript:void(0);" onclick="imageclicked()"><img id="img1" src="images/showLove (1).jpg"></a>
+						<a href="javascript:void(0);" onclick="imageclicked(this)"><img id="img1" src="images/showLove (1).jpg"></a>
 					</li>
 				</ul>
 				<ul class="img-column" id="ul2">
 					<li id="img">
-						<a href="javascript:void(0);" onclick="imageclicked()"><img id="img2" src="images/showLove (2).jpg"></a>
+						<a href="javascript:void(0);" onclick="imageclicked(this)"><img id="img2" src="images/showLove (2).jpg"></a>
 					</li>
 				</ul>
 				<ul class="img-column" id="ul3">
 					<li id="img">
-						<a href="javascript:void(0);" onclick="imageclicked()"><img id="img3" src="images/showLove (3).jpg"></a>
+						<a href="javascript:void(0);" onclick="imageclicked(this)"><img id="img3" src="images/showLove (3).jpg"></a>
 					</li>
 				</ul>
 			</div>
