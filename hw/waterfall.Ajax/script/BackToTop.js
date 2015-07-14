@@ -39,6 +39,7 @@ function clicked(){
 BackToTop = {
 	init: function(arg){
 		button.type= 'button';
+		$(button).css('style', 'width:10%;');
 		button.setAttribute('class', 'button');
 		button.value = 'Top';
 		body[0].appendChild(button);
