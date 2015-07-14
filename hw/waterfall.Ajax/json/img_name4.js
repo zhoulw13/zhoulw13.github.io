@@ -21,6 +21,6 @@
 {"id":79, "latitude":13, "longitude":161,  "url":"images/showLove (79).jpg", "column":1},
 {"id":80, "latitude":-48, "longitude":96,  "url":"images/showLove (80).jpg", "column":3},
 {"id":81, "latitude":79, "longitude":-110,  "url":"images/showLove (81).jpg", "column":1},
-{"id":82, "latitude":52, "longitude":52,  "url":"images/showLove (82).jpg", "column":2},
+{"id":82, "latitude":52, "longitude":52,  "url":"images/showLove (82).jpg", "column":2}
 	]
 }

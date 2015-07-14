@@ -1,4 +1,6 @@
 function getImg(i){
+	$('body').prepend("<div class='popBg'></div>");
+	$('body').append("<img class='img-process' src='images/loading.jpg'>");
 	var str = "https://raw.githubusercontent.com/zhoulw13/zhoulw13.github.io/master/hw/waterfall.Ajax/json/img_name"+i+".js";
 	$.getJSON(str, callback);
 }
@@ -10,17 +12,24 @@ function callback(data){
  			longitude:item.longitude
  		}
  		var d = computeDistance(startCoords, my_pos);
- 		var li = $('#ul1 li:first');
+ 		var li = $('#ul1 div:first');
  		var c = li.clone(true);
  		c.children().children().attr("src", item.url);
  		c.children().children().attr("id", "img"+item.id);
  		c.children('p').html("该图片距离您"+parseInt(d)+"km");
  		var str = "#ul" + item.column;
  		if(item.id <=3)
-			$("#ul"+item.id+ " li:first").remove();
+			$("#ul"+item.id+ " div:first").remove();
  		var ul = $(str);
  		ul.append(c);
   });
+	$('.image-wall').ready(function(){
+		$('.popBg').remove();
+		$('.img-process').remove();
+ 	});
+ 	$('.image-wall').error(function(){
+		alert('error');
+ 	});
 }
 
 function computeDistance(startCoords, destCoords) {
