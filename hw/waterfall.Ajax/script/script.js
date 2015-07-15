@@ -171,6 +171,7 @@ function getPos(){
 	if(navigator.geolocation){
 		navigator.geolocation.getCurrentPosition(function(pos){
 			var my_pos = pos;
+			alert(pos.latitude + ', ' pos.longitude);
 			//my_pos.latitude = pos.latitude;
 			//my_pos.longitude = pos.longitude;
 			return my_pos;
