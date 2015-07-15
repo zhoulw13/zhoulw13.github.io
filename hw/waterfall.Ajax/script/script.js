@@ -1,6 +1,9 @@
 function getImg(i){
 	$('body').prepend("<div class='popBg'></div>");
-	$('body').append("<img class='img-process' src='images/loading.jpg'>");
+	$('body').append("<img class='img-process' src='images/loading.gif'>");
+	var img = $('.img-process');
+	$(img).css("top", parseInt(($(window).height() - img.height())/2) + "px");
+	$(img).css("left", parseInt(($(window).width() - img.width())/2) + "px");
 	var str = "https://raw.githubusercontent.com/zhoulw13/zhoulw13.github.io/master/hw/waterfall.Ajax/json/img_name"+i+".js";
 	$.getJSON(str, callback);
 }
@@ -24,11 +27,15 @@ function callback(data){
  		ul.append(c);
   });
 	$('.image-wall').ready(function(){
-		$('.popBg').remove();
-		$('.img-process').remove();
+		window.setTimeout("$('.popBg').remove();$('.img-process').remove();", 0.15);
  	});
  	$('.image-wall').error(function(){
-		alert('error');
+		$('.img-process').remove();
+		$('body').append("<img class='img-process' src='images/error.jpg'>");
+		var img = $('.img-process');
+		$(img).css("top", parseInt(($(window).height() - img.height())/2) + "px");
+		$(img).css("left", parseInt(($(window).width() - img.width())/2) + "px");
+		window.setTimeout("$('.img-process').remove();", 0.5);
  	});
 }
 
@@ -59,8 +66,12 @@ function getComments(i){
 function commentCB(data){
 	$.each(data.comments, function(i,item){
  		var c = $('.comments');
- 		var p = "<p>"+item.content+"</p><hr />";
- 		c.append(p);
+ 		var div = "<div class='comment'></div>";
+ 		c.append(div);
+ 		alert(item.author);
+ 		div = $('.comments .comment');
+ 		var author = "<div class='author'>" + item.author + ": </div>";
+ 		div.append(author);
   });
 }
 
@@ -80,17 +91,23 @@ $(window).scroll(function(){
 var mousemove = window.onmousewheel;
 var dmousemove = document.onmousewheel;
 
+
 function imageclicked(evt){
 	var e = window.event;
     var obj = e.target || e.srcElement;
 	$('body').prepend("<div class='popBg'></div>");
-	$('body').append("<img class='popWrap' src='"+ obj.src +"'>");
+	$('body').append("<div class='div-img'><img class='popWrap' src='"+ obj.src +"'></div>");
 	$('body').append("<div class='comments'></div>");
+	$('body').append("<input type='button' onclick='closeImg()' class='close-button' style='background-image: url(images/close.png);'></input>");
+	$('.img-wall').attr('style', '-webkit-filter: blur(5px);');
 	var img = $('.popWrap');
 	if(img.height() > $(window).height()*0.8)
 		$(img).css("height",$(window).height()*0.8+"px");
 	$(img).css("top", parseInt(($(window).height() - img.height())/2) + "px");
 	$(img).css("left", parseInt(($(window).width() - img.width())/3) + "px");
+	var closeButton = $('.close-button');
+	$(closeButton).css("top", parseInt(($(window).height() - img.height())/2)-15 + "px");
+	$(closeButton).css("left", parseInt($(window).width()/3 + img.width()*2/3)-10 + "px");
 
 	var comment = $('.comments');
 	$(comment).css("width", parseInt(($(window).width() - img.width())/3)+"px");
@@ -103,15 +120,19 @@ function imageclicked(evt){
 	
 
 	window.onmousewheel = document.onmousewheel = function () {return false;}
-	$('.popBg').click(function(){
-		$('.popBg').remove();
-		$('.popWrap').remove();
-		$('.comments').remove();
-		window.onmousewheel = mousemove;
-		document.onmousewheel = dmousemove;
-	});
+	$('.popBg').click(closeImg);
 }
 
+function closeImg(){
+	$('.popBg').remove();
+	$('.div-img').remove();
+	$('.popWrap').remove();
+	$('.comments').remove();
+	$('.close-button').remove();
+	$('.img-wall').attr('style', '-webkit-filter: blur(0px);');
+	window.onmousewheel = mousemove;
+	document.onmousewheel = dmousemove;
+}
 
 function pagedown(){
 	$('.comments p').remove();
