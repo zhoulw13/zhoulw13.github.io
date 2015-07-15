@@ -9,13 +9,6 @@ function getImg(i){
 }
 
 function callback(data){
-	var my_pos = {
-		latitude:0,
-		longitude:0
-	}
-	console.log(my_pos);
-	my_pos = getPos();
-	console.log(my_pos);
 	$.each(data.images, function(i,item){
 		var startCoords ={
  			latitude:item.latitude,
@@ -167,14 +160,16 @@ function disableButton(){
 		$('#pageup').attr('disabled', false);
 }
 
+var my_pos = {
+	latitude:0,
+	longitude:0
+}
+
 function getPos(){
 	if(navigator.geolocation){
 		navigator.geolocation.getCurrentPosition(function(pos){
-			var my_pos = pos;
-			alert(pos.latitude + ', ' + pos.longitude);
-			//my_pos.latitude = pos.latitude;
-			//my_pos.longitude = pos.longitude;
-			return my_pos;
-		})
+			my_pos.latitude = pos.coords.latitude;
+			my_pos.longitude = pos.coords.longitude;
+		});
 	}
 }
