@@ -5,6 +5,7 @@ function getImg(i){
 	$(img).css("top", parseInt(($(window).height() - img.height())/2) + "px");
 	$(img).css("left", parseInt(($(window).width() - img.width())/2) + "px");
 	var str = "https://raw.githubusercontent.com/zhoulw13/zhoulw13.github.io/master/hw/waterfall.Ajax/json/img_name"+i+".js";
+	getPos();
 	$.getJSON(str, callback);
 }
 
