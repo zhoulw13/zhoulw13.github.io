@@ -27,7 +27,7 @@ hr { width:80%; height:2px; background: #fff }
 .button{
 	position:fixed;
 	height:5%;
-	font: 16px/30px 'opensans-bold', sans-serif;
+	font: bold 20px/30px consolas, sans-serif;
 	background: #31D264;
     z-index: 0;
 	

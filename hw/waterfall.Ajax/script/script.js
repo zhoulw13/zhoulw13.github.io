@@ -5,17 +5,23 @@ function getImg(i){
 	$(img).css("top", parseInt(($(window).height() - img.height())/2) + "px");
 	$(img).css("left", parseInt(($(window).width() - img.width())/2) + "px");
 	var str = "https://raw.githubusercontent.com/zhoulw13/zhoulw13.github.io/master/hw/waterfall.Ajax/json/img_name"+i+".js";
-	getPos();
 	$.getJSON(str, callback);
 }
 
 function callback(data){
+	var my_pos = {
+		latitude:0,
+		longitude:0
+	}
+	console.log(my_pos);
+	my_pos = getPos();
+	console.log(my_pos);
 	$.each(data.images, function(i,item){
 		var startCoords ={
  			latitude:item.latitude,
  			longitude:item.longitude
  		}
- 		console.log(my_pos.latitude + ', ' + my_pos.longitude);
+ 		//console.log(my_pos.latitude + ', ' + my_pos.longitude);
  		var d = computeDistance(startCoords, my_pos);
  		var li = $('#ul1 div:first');
  		var c = li.clone(true);
@@ -161,16 +167,13 @@ function disableButton(){
 		$('#pageup').attr('disabled', false);
 }
 
-var my_pos ={
-	latitude:0,
- 	longitude:0
-}
-
 function getPos(){
 	if(navigator.geolocation){
 		navigator.geolocation.getCurrentPosition(function(pos){
-			my_pos.latitude = pos.latitude;
-			my_pos.longitude = pos.longitude;
+			var my_pos = pos;
+			//my_pos.latitude = pos.latitude;
+			//my_pos.longitude = pos.longitude;
+			return my_pos;
 		})
 	}
 }
