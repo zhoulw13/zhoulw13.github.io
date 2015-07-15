@@ -14,6 +14,7 @@ function callback(data){
  			latitude:item.latitude,
  			longitude:item.longitude
  		}
+ 		console.log(my_pos.latitude + ', ' + my_pos.longitude);
  		var d = computeDistance(startCoords, my_pos);
  		var li = $('#ul1 div:first');
  		var c = li.clone(true);
@@ -66,12 +67,12 @@ function getComments(i){
 function commentCB(data){
 	$.each(data.comments, function(i,item){
  		var c = $('.comments');
- 		var div = "<div class='comment'></div>";
- 		c.append(div);
- 		alert(item.author);
- 		div = $('.comments .comment');
  		var author = "<div class='author'>" + item.author + ": </div>";
- 		div.append(author);
+ 		var content = "<div class='content'>" + item.content + "</div>";
+ 		var date = "<div class='date'>" + item.date + "</div>";
+ 		var device = "<div class='device'>" + "来自 " + item.device + "</div>";
+ 		var str = "<div class='comment' id='comment" + item.id + "'>" + author + device + date + content + "</div>";
+ 		c.append(str);
   });
 }
 
@@ -135,16 +136,14 @@ function closeImg(){
 }
 
 function pagedown(){
-	$('.comments p').remove();
-	$('.comments hr').remove();
+	$('.comments .comment').remove();
 	cpage+=1;
 	getComments(cpage);
 	disableButton();
 }
 
 function pageup(){
-	$('.comments p').remove();
-	$('.comments hr').remove();
+	$('.comments .comment').remove();
 	cpage-=1;
 	getComments(cpage);
 	disableButton();
