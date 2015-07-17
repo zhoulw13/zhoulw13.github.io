@@ -37,8 +37,8 @@ function nickClicked(){
 	}else if($.inArray(nickname, usersOnline) != -1){
 		$('.modal-body').append('<div id="nick-error" class="alert alert-danger" style="margin-top:10px;">Nickname Already Exist !</div>');
 	}else{
-		var temp = userRef.push(nickname);
 		username = nickname;
+		var temp = userRef.push(nickname);
 		userID = temp.name();
 		$('#myModal').modal('hide');
 	}
@@ -51,6 +51,10 @@ userRef.on('child_added', function(snapshot){
 	usersOnline.push(snapshot.val());
 	var li = $("<li class='list-group-item'>");
 	li.text(snapshot.val());
+	//mark local user
+	if(snapshot.val() === username){ 
+		li.append("<span class='badge'>You</span>");
+	}
 	$('#online-users').append(li);
 });
 
@@ -82,21 +86,35 @@ function sendClicked(){
 }
 
 
+var imgList = ["laugh", "smile", "cry", "lcry", "blue", "angry", "handsup", "terrified", "daze"];
 
   // Add a callback that is triggered for each chat message.
 messagesRef.limitToLast(12).on('child_added', function (snapshot) {
     //GET DATA
     var data = snapshot.val();
     var message = data.text;
+
+    //deal with emoji
+    var re = re = new RegExp('\\[' + imgList.join('\\]|\\[') + '\\]')
+    var match = re.exec(message);
+    while(match != null){
+    	var index = match.index;
+    	var left = message.substring(0, match.index);
+    	var right = message.substring(match.index+match[0].length, message.length);
+    	var center = "<img src='images/" + match[0].substring(1, match[0].length-1) + ".png' style='height:40px; width:40px;'>";
+    	message = left + center + right;
+    	match = re.exec(message);
+    }
+
     //CREATE ELEMENTS MESSAGE & SANITIZE TEXT
     var messageElement = $("<li class='list-group-item'>");
     if(data.name != username){
     	var nameElement = $("<strong class='example-chat-username'></strong>")
     	nameElement.text(data.name + " : ");
-    	messageElement.text(message).prepend(nameElement);
+    	messageElement.html(message).prepend(nameElement);
     }else{
     	messageElement.css('text-align', 'right');
-    	messageElement.text(message);
+    	messageElement.html(message);
     }
     //ADD MESSAGE
     messageList.append(messageElement);
@@ -113,3 +131,10 @@ window.onbeforeunload = function(){
 	var freRef = new Firebase(str);
 	freRef.remove();
 }
+
+//emoji into input field
+$('.emoji').parent().click(function (e){
+	var str = $('#messageInput').val();
+	str += '[' + this.id + ']';
+	$('#messageInput').val(str);
+});

@@ -26,7 +26,7 @@
 					</div>
 				</div><!-- /.modal-content -->
 			</div><!-- /.modal-dialog -->
-		</div><!-- /.modal -->
+		</div><!-- /.modal -->		
 		<div class="container">
 			<div class="row">
 				<h1 class="text-center">Web Online Chat</h1>
@@ -47,6 +47,48 @@
 					</div>
 					<div class="row">
 						<div class="input-group" style="width:80%; margin:10px;">
+							<div class="input-group-btn">
+								<button type="button" class="btn btn-primary dropdown-toggle" data-toggle="dropdown">emoji<span class="caret"></span></button>
+								<ul class="dropdown-menu">
+									<li class="divider"></li>
+									<div class="row">
+										<div class="col-lg-4">
+											<li><a href="#" id="smile"><img src="images/smile.png" class="emoji" style="height:30px;width:30px;"></a></li>
+										</div>
+										<div class="col-lg-4">
+											<li><a href="#" id="laugh"><img src="images/laugh.png" class="emoji" style="height:30px;width:30px;"></a></li>
+										</div>
+										<div class="col-lg-4">
+											<li><a href="#" id="blue"><img src="images/blue.png" class="emoji" style="height:30px;width:30px;"></a></li>
+										</div>
+									</div>
+									<li class="divider"></li>
+									<div class="row">
+										<div class="col-lg-4">
+											<li><a href="#" id="cry"><img src="images/cry.png" class="emoji" style="height:30px;width:30px;"></a></li>
+										</div>
+										<div class="col-lg-4">
+											<li><a href="#" id="lcry"><img src="images/lcry.png" class="emoji" style="height:30px;width:30px;"></a></li>
+										</div>
+										<div class="col-lg-4">
+											<li><a href="#" id="terrified"><img src="images/terrified.png" class="emoji" style="height:30px;width:30px;"></a></li>
+										</div>
+									</div>
+									<li class="divider"></li>
+									<div class="row">
+										<div class="col-lg-4">
+											<li><a href="#" id="daze"><img src="images/daze.png" class="emoji" style="height:30px;width:30px;"></a></li>
+										</div>
+										<div class="col-lg-4">
+											<li><a href="#" id="angry"><img src="images/angry.png" class="emoji" style="height:30px;width:30px;"></a></li>
+										</div>
+										<div class="col-lg-4">
+											<li><a href="#" id="handsup"><img src="images/handsup.png" class="emoji" style="height:30px;width:30px;"></a></li>
+										</div>
+									</div>
+									<li class="divider"></li>
+								</ul>
+							</div><!-- /btn-group -->
                				<input type="text" class="form-control" id="messageInput" placeholder='Type a message...'>
                				<span class="input-group-btn input-group-lg">
 				                 <button class="btn btn-success" type="button" id="sendButton" onclick="sendclicked()">Send</button>
@@ -57,7 +99,5 @@
 			</div>
 		</div>
 		<script type='text/javascript' src='js/script.js'></script>
-		<script type="text/javascript">
-		</script>
 	</body>
 </html>
