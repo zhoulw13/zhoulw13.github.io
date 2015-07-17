@@ -6,12 +6,16 @@ $(function () { $('#myModal').modal({
 
 // CREATE A REFERENCE TO FIREBASE
 var rootRef = new Firebase('https://boiling-torch-3823.firebaseio.com/');
-var messagesRef = rootRef.child('Messages');
+var roomsRef = rootRef.child('Room');
+var roomRef = roomsRef.child('main');
+var messagesRef = roomRef.child('Messages');
 var userRef = rootRef.child('Users');
 var usersOnline = new Array();
+var roomOnline = new Array();
 
 var messageField = $('#messageInput');
 var username = "";
+var room = "main";
 var userID = 0;
 var messageList = $('#messages');
 
@@ -26,17 +30,18 @@ $('#input-nick').keypress(function (e) {
 
 function nickClicked(){
 	$('#nick-error').remove();
+
 	var nickname = $('#input-nick').val();
 	if(nickname === ""){
-		$('.modal-body').append('<div id="nick-error" class="alert alert-warning" style="margin-top:10px;">Empty Name Invalid !</div>');
+		$('.modal-footer').append('<div id="nick-error" class="alert alert-warning" style="margin-top:10px;">Empty Name Invalid !</div>');
 	}else if(nickname.indexOf(" ") >= 0){
-		$('.modal-body').append('<div id="nick-error" class="alert alert-warning" style="margin-top:10px;">Blank Space Not Allowed !</div>');
+		$('.modal-footer').append('<div id="nick-error" class="alert alert-warning" style="margin-top:10px;">Blank Space Not Allowed !</div>');
 	}
-	else if(nickname.length > 28){
-		$('.modal-body').append('<div id="nick-error" class="alert alert-warning" style="margin-top:10px;">Nickname Too Long !</div>');
+	else if(nickname.length > 20){
+		$('.modal-footer').append('<div id="nick-error" class="alert alert-warning" style="margin-top:10px;">Nickname Too Long !</div>');
 	}else if($.inArray(nickname, usersOnline) != -1){
-		$('.modal-body').append('<div id="nick-error" class="alert alert-danger" style="margin-top:10px;">Nickname Already Exist !</div>');
-	}else{
+		$('.modal-footer').append('<div id="nick-error" class="alert alert-danger" style="margin-top:10px;">Nickname Already Exist !</div>');
+	}else{ // valid username
 		username = nickname;
 		var temp = userRef.push(nickname);
 		userID = temp.name();
@@ -44,25 +49,6 @@ function nickClicked(){
 	}
 	return;
 }
-
-
-//listener on users get in
-userRef.on('child_added', function(snapshot){
-	usersOnline.push(snapshot.val());
-	var li = $("<li class='list-group-item'>");
-	li.text(snapshot.val());
-	//mark local user
-	if(snapshot.val() === username){ 
-		li.append("<span class='badge'>You</span>");
-	}
-	$('#online-users').append(li);
-});
-
-//listener on users' quit
-userRef.on('child_removed', function(snapshot){
-	var str = "li:contains(" + snapshot.val() + ")";
-	$(str).remove();
-});
 
 
 //listen for send commmand
@@ -86,10 +72,30 @@ function sendClicked(){
 }
 
 
-var imgList = ["laugh", "smile", "cry", "lcry", "blue", "angry", "handsup", "terrified", "daze"];
+		//listener on users get in
+userRef.on('child_added', function(snapshot){
+	usersOnline.push(snapshot.val());
+	var li = $("<li class='list-group-item'>");
+	li.attr('id', snapshot.val());
+	li.text(snapshot.val());
+	//mark local user
+	if(snapshot.val() === username){ 
+		li.append("<span class='badge'>You</span>");
+	}
+	$('#online-users').append(li);
+});
 
-  // Add a callback that is triggered for each chat message.
-messagesRef.limitToLast(12).on('child_added', function (snapshot) {
+//listener on users' quit
+userRef.on('child_removed', function(snapshot){
+	var str = "li#"+snapshot.val();
+	$(str).remove();
+});
+
+
+
+var imgList = ["laugh", "smile", "cry", "lcry", "blue", "angry", "handsup", "terrified", "daze"];
+messagesRef.limitToLast(12).on('child_added', messageAdd);
+function messageAdd(snapshot) {
     //GET DATA
     var data = snapshot.val();
     var message = data.text;
@@ -122,7 +128,7 @@ messagesRef.limitToLast(12).on('child_added', function (snapshot) {
 
     //SCROLL TO BOTTOM OF MESSAGE LIST
     $('#div-message')[0].scrollTop = $('#div-message')[0].scrollHeight;
-});
+}
 
 
 //release username when quit
@@ -137,4 +143,76 @@ $('.emoji').parent().click(function (e){
 	var str = $('#messageInput').val();
 	str += '[' + this.id + ']';
 	$('#messageInput').val(str);
+});
+
+
+
+//multi room model
+roomsRef.on('child_added', function(snapshot){
+	var li = $("<li class='list-group-item'>");
+	var a = $("<a onclick='requestChange(this)'>")
+	a.attr('id', snapshot.key());
+	a.text(snapshot.key());
+	li.append(a);
+	roomOnline.push(snapshot.key());
+	if(snapshot.key() === room){ 
+		li.append("<span class='badge'>Your Room</span>");
+	}
+	$('#online-rooms').append(li);
+});
+
+$('#bt-room').click(roomClicked);
+$('#input-room').keypress(function (e) {
+	if (e.keyCode == 13) {
+	roomClicked();
+   }
+});
+
+function roomClicked(){
+	$('#room-error').remove();
+	var roomname = $('#input-room').val();
+	if(roomname === ""){
+		$('#create-room').prepend('<div id="room-error" class="alert alert-warning" style="margin-top:10px;">Empty Name Invalid !</div>');
+	}else if(roomname.indexOf(" ") >= 0){
+		$('#create-room').prepend('<div id="room-error" class="alert alert-warning" style="margin-top:10px;">Blank Space Not Allowed !</div>');
+	}
+	else if(roomname.length > 20){
+		$('#create-room').prepend('<div id="room-error" class="alert alert-warning" style="margin-top:10px;">Roomname Too Long !</div>');
+	}else if($.inArray(roomname, roomOnline) != -1){
+		$('#create-room').prepend('<div id="room-error" class="alert alert-danger" style="margin-top:10px;">Room Already Exist !</div>');
+	}else{
+		room = roomname;
+		roomChanged();
+		$('#input-room').val('');
+	}
+	return;
+}
+
+
+function roomChanged(){
+	roomRef = roomsRef.child(room);
+	messagesRef.off('child_added', messageAdd);
+	messagesRef = roomRef.child('Messages');
+	// Add a callback that is triggered for each chat message.
+	messagesRef.limitToLast(12).on('child_added', messageAdd);
+	$('#messages').empty();
+	$('#online-rooms li span').remove();
+	var str = "a#" + room;
+	$(str).parent().append("<span class='badge'>Your Room</span>");
+}
+
+
+function requestChange(e){
+	if(e.text === room){
+		return;
+	}else{
+		room = e.text;
+		roomChanged();
+	}
+};
+
+
+roomsRef.on('child_removed', function(snapshot){
+	var str = "a#" + snapshot.val();
+	$(str).parent().remove();
 });
