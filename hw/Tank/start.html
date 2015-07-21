@@ -1,0 +1,23 @@
+<!DOCTYPE html>
+<html>
+	<head>
+	<title>Let's start!</title>
+	<link rel="stylesheet" type="text/css" href="css/start.css">
+	<script src="js/jquery-2.1.4.min.js" type="text/javascript"></script>
+	</head>
+	<body>
+		<div id="layout">
+		<img src="images/time.png" id="Mode2"/>
+		<img src="images/classical.png" id="Mode1"/>
+		<img src="images/crazy.png" id="Mode3"/>
+		</div>
+		<script>
+			var gameMode;//经典：1；计时：2；疯狂：3
+			$('img').click(function(e){
+				gameMode = this.id[this.id.length-1];
+				window.location.assign('game.html' + '?' + 'gameMode=' + gameMode);
+			});
+		</script>
+	</body>
+	
+</html>
