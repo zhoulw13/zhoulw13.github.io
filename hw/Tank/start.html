@@ -1,4 +1,4 @@
-<!DOCTYPE html>
+﻿<!DOCTYPE html>
 <html>
 	<head>
 	<title>Let's start!</title>
@@ -7,15 +7,21 @@
 	</head>
 	<body>
 		<div id="layout">
-		<img src="images/time.png" id="Mode2"/>
-		<img src="images/classical.png" id="Mode1"/>
-		<img src="images/crazy.png" id="Mode3"/>
+		<img src="images/time.png" id="Mode2" width="163px" height="79px"/>
+		<img src="images/classical.png" id="Mode1" width="163px" height="79px"/>
+		<img src="images/crazy.png" id="Mode3" width="163px" height="79px"/>
+		<img src="images/player1.png" id="player1_key" width="250px" height="150px"/>
+		<img src="images/player2.png" id="player2_key" width="250px" height="150px"/>
 		</div>
 		<script>
 			var gameMode;//经典：1；计时：2；疯狂：3
 			$('img').click(function(e){
+				for(var i=1;i<4;i++)
+					$("#Mode"+i).css("display","none");
+				$("#player1_key").css("display","block");
+				$("#player2_key").css("display","block");
 				gameMode = this.id[this.id.length-1];
-				window.location.assign('game.html' + '?' + 'gameMode=' + gameMode);
+				setTimeout("window.location.assign('index.html' + '?' + 'gameMode=' + gameMode)",5000);
 			});
 		</script>
 	</body>

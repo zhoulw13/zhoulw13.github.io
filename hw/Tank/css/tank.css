@@ -1,0 +1,62 @@
+canvas#minimap {
+	position : absolute;
+}
+
+canvas#minimapBullet
+{
+	position : absolute;
+}
+
+#clock_type
+{
+	-webkit-text-fill-color:white;
+	-webkit-text-stroke-color:blue;
+	-webkit-text-stroke-width:1px;
+	font-size:40px;
+}
+#overlay{
+	position:fixed;
+	top:0;
+	left:0;
+	width:100%;
+	height:100%;
+	background:#AAA;
+	display:none; 
+	opacity: 0.7;
+} 
+
+#win{
+	position:fixed;
+	top:30%;
+	left:35%;
+	display:none;
+	width:400px;
+	height:200px;
+	background:#0FF;
+	border-radius:15px; 
+}  	
+
+#alertMsg{
+	font-size:30px;
+	font-weight:bold;
+}
+
+button, button:visited {
+	background: white;
+	padding: 5px 10px 6px;
+	color: black;
+	text-decoration: none;
+	-moz-border-radius: 6px;
+	-webkit-border-radius: 6px;
+	-moz-box-shadow: 0 1px 3px rgba(0,0,0,0.6);
+	-webkit-box-shadow: 0 1px 3px rgba(0,0,0,0.6);
+	text-shadow: 0 -1px 1px rgba(0,0,0,0.25);
+	border-bottom: 1px solid rgba(0,0,0,0.25);
+	cursor: pointer;
+}
+
+button{
+	margin-top:50px;
+	width:80px;
+	height:30px;
+}

@@ -1,4 +1,10 @@
-var expand_scale = 8;
+﻿/*
+地图绘制
+*/
+
+var expand_scale = 8;//空白区域方块的边长
+
+//坦克
 var tank_width = 3;
 var tank_height = 4;
 var tank_hypotenuse = Math.sqrt(tank_height*tank_height + tank_width*tank_width)/2;
@@ -7,6 +13,7 @@ var tank_angle = Math.atan(tank_width/tank_height);
 var raw_width;
 var raw_height;
 
+//地图绘制
 var maps = [
 [
 	"31111131311131113",
@@ -181,7 +188,7 @@ var maps = [
 	"313111111111113111313"
 ]];
 
-
+//将字符串数组解析为地图
 function expand_map(id)
 {
 	var raw_map = maps[id];

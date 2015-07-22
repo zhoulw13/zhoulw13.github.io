@@ -17,8 +17,6 @@ img{
 	  position:absolute;
       border: none;
       cursor: pointer;
-	  width:163px;
-	  height:79px;
     } 
 
 @-webkit-keyframes buzz-out 
@@ -52,4 +50,18 @@ img:hover  {
 	  position:absolute;
 	  top:50%;
 	  left:65%;
-    }   	
+    }  
+	
+#player1_key{
+	position:absolute;
+	top:50%;
+	left:15%;
+	display:none;
+}
+
+#player2_key{
+	position:absolute;
+	top:50%;
+	left:55%;
+	display:none;
+}
